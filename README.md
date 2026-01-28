@@ -27,25 +27,40 @@ The `.gitignore` file helps keep your repository clean by excluding:
 
 ### Current .gitignore Configuration
 
-This repository's `.gitignore` contains:
+This repository's `.gitignore` has been configured with comprehensive patterns to exclude:
 
-```
-sftp-config.json
-```
+1. **SFTP/FTP Configuration files** - `sftp-config.json`, `.ftpconfig`, `.deployrc`
+   - These contain sensitive server credentials and connection details
+   - Must be kept private and configured per environment
 
-**Why is `sftp-config.json` ignored?**
+2. **IDE/Editor files** - `.vscode/`, `.idea/`, `*.sublime-project`, etc.
+   - Personal development environment preferences
+   - Should not be shared across team members
 
-`sftp-config.json` is a configuration file typically created by FTP/SFTP deployment tools (like Sublime SFTP plugin) that contains:
+3. **Operating System files** - `.DS_Store` (macOS), `Thumbs.db` (Windows)
+   - OS-specific metadata files
+   - Not relevant to the project
+
+4. **Build artifacts** - `node_modules/`, `dist/`, `build/`
+   - Generated files that can be recreated
+   - Keeps repository size minimal
+
+5. **Environment files** - `.env`, `.env.local`
+   - Contains environment-specific configuration
+   - May include sensitive data
+
+6. **Logs and temporary files** - `*.log`, `*.tmp`, `.cache/`
+   - Runtime generated files
+   - Not needed in version control
+
+**Key Security Protection:**
+
+The most critical exclusion is `sftp-config.json` because it typically contains:
 - Server connection details (hostname, port)
 - Authentication credentials (username, password, SSH keys)
 - Remote path mappings
-- Upload/download preferences
 
-**This file MUST be ignored** because:
-- It contains sensitive connection credentials
-- It's environment-specific (each developer may have different server access)
-- Including it in version control would expose server credentials to anyone with repository access
-- It's a security risk if the repository is public
+Including this file in version control would expose deployment credentials to anyone with repository access.
 
 ## Impact on Deployment
 
@@ -84,7 +99,13 @@ For this Squarespace template:
 - JavaScript files (`scripts/*.js`)
 
 **❌ EXCLUDED from version control (in .gitignore):**
-- `sftp-config.json` - Must be configured separately for each deployment environment
+- `sftp-config.json` and other SFTP/FTP config files - Must be configured separately for each deployment environment
+- IDE/Editor files (`.vscode/`, `.idea/`, etc.) - Personal development environment settings
+- OS files (`.DS_Store`, `Thumbs.db`) - Operating system metadata
+- `node_modules/` - Dependencies (if using build tools)
+- Environment files (`.env`) - Environment-specific configuration
+- Build artifacts (`dist/`, `build/`) - Generated files
+- Logs and temporary files - Runtime generated content
 
 ### Deployment Workflow for Squarespace Templates
 
@@ -111,37 +132,20 @@ For this Squarespace template:
 4. **Review .gitignore regularly** - Ensure it includes all necessary exclusions
 5. **Never commit then ignore** - If a file is already tracked, `.gitignore` won't remove it
 
-### Common Files to Ignore for Squarespace Templates
+### What's Already in .gitignore
 
-Consider adding these to `.gitignore` if you use them:
+The `.gitignore` file in this repository already includes comprehensive patterns for:
 
-```
-# SFTP/FTP Configurations
-sftp-config.json
-.ftpconfig
-.deployrc
+- **SFTP/FTP Configurations** - `sftp-config.json`, `.ftpconfig`, `.deployrc`
+- **IDE/Editor files** - `.vscode/`, `.idea/`, `*.sublime-project`, `*.sublime-workspace`, etc.
+- **OS files** - `.DS_Store`, `Thumbs.db`, and other OS-specific metadata
+- **Node modules** - `node_modules/` (if using build tools)
+- **Logs** - `*.log`, `npm-debug.log*`, `yarn-debug.log*`
+- **Environment files** - `.env`, `.env.local`, `.env.*.local`
+- **Build artifacts** - `dist/`, `build/`
+- **Temporary files** - `*.tmp`, `.cache/`
 
-# IDE/Editor files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Node modules (if using build tools)
-node_modules/
-
-# Logs
-*.log
-npm-debug.log*
-
-# Environment files
-.env
-.env.local
-```
+You can view the complete `.gitignore` file in the repository root to see all exclusion patterns.
 
 ## Additional Resources
 
