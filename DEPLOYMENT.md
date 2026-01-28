@@ -12,11 +12,16 @@ The following changes were made to restore the repository:
 - ✅ Removed `cm25-f7c2b74cc57bd2f74638fb8b0827b4b9feafd665.zip` (not present in original state)
 - ✅ All template files match the f7c2b74 commit state
 
-## Deployment Package
-
-A deployment package (`cm25-deployment-package.tar.gz`) has been created containing all template files. This package can be extracted and uploaded to your Squarespace site via SFTP.
-
 ## Deployment Instructions
+
+### Before Deployment: Create Deployment Package (Optional)
+
+If desired, you can create a deployment package locally:
+```bash
+tar -czf cm25-deployment-package.tar.gz blocks collections scripts styles site.region template.conf
+```
+
+**Note:** This package is for local convenience only and is not tracked in version control.
 
 ### Method 1: SFTP Deployment (Recommended)
 
